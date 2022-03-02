@@ -31,7 +31,6 @@ public class UserRegServiceImpl implements UserRegService{
 
 	@Override
 	public int registerUser(UserDetails userDts) {
-		// TODO Auto-generated method stub
 		int i=0;
 		if(!userDts.equals(null)){
 			i=dao.saveRegisterUser(userDts);		
@@ -44,6 +43,15 @@ public class UserRegServiceImpl implements UserRegService{
 		
 		
 		return i;
+	}
+
+
+
+	@Override
+	public int validate(UserDetails userDtls) {
+	
+		int message = dao.validate(userDtls);
+		return message;
 	}
 
 

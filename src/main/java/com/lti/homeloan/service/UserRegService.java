@@ -9,6 +9,6 @@ public interface UserRegService {
 	
 	public abstract int registerUser(UserDetails userDtls);
 	
-	
+	public int validate(UserDetails userDtls);
 	
 }

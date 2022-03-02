@@ -9,5 +9,6 @@ public interface UserRegDao {
 	public abstract int saveRegisterUser(UserDetails userdts);
 //	public abstract int saveLoginUser(UserDetails userdts);
 //	public abstract int saveLoanTransaction(UserDetails userdts);
+	public int validate(UserDetails userDtls);
 	
 }

@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +31,14 @@ public class UserRegController {
 		
 		return userService.registerUser(userDts);	
 	}
+	
+	@GetMapping("/validate")
+	public int validate(@RequestBody UserDetails userDts) {
+		
+		System.out.println("UserRegistration"+userDts);
+		
+		return userService.validate(userDts);	
+	}
 
+	
 }
