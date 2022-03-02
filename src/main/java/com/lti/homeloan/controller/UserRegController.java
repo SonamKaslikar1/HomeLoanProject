@@ -32,7 +32,7 @@ public class UserRegController {
 		return userService.registerUser(userDts);	
 	}
 	
-	@GetMapping("/validate")
+	@PostMapping("/validate")
 	public int validate(@RequestBody UserDetails userDts) {
 		
 		System.out.println("UserRegistration"+userDts);

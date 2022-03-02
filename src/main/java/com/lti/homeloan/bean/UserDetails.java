@@ -83,6 +83,12 @@ public class UserDetails {
 	public void setLoanTypeId(String loanTypeId) {
 		this.loanTypeId = loanTypeId;
 	}
+	public String getFormName() {
+		return formName;
+	}
+	public void setFormName(String formName) {
+		this.formName = formName;
+	}
 	private String firstname;
 	private String lastname;
 	private long mobileNo;
@@ -96,4 +102,5 @@ public class UserDetails {
 	private String userRole;
 	private String loanTypeId;
 	private int ur;
+	private String formName;
 }

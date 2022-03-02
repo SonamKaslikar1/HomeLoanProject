@@ -60,18 +60,46 @@ public class UserRegDaoImpl implements UserRegDao {
 	public int validate(UserDetails userDtls) {
 		int message = 1;
 
-		Query query = em.createQuery("SELECT a.primaryEmail," + " b.userPassword "
-				+ " FROM UserRegistration a , UserLogin b\r\n"
-				+ " WHERE a.userResId = b.ur");
-		List<Object[]> userDetsList = (List<Object[]>)query.getResultList();
-		
-		for(int i=0; i<userDetsList.size(); i++) {
-			if(userDetsList.get(i)[0].equals(userDtls.getPrimaryEmail()) && 
-					userDetsList.get(i)[1].equals(userDtls.getPassword())) {
-				message =0;
+		if (userDtls.getFormName().equals("Login")) {
+			Query query = em.createQuery("SELECT a.primaryEmail," + " b.userPassword "
+					+ " FROM UserRegistration a , UserLogin b\r\n" + " WHERE a.userResId = b.ur");
+			List<Object[]> userDetsList = (List<Object[]>) query.getResultList();
+
+			for (int i = 0; i < userDetsList.size(); i++) {
+				if (userDetsList.get(i)[0].equals(userDtls.getPrimaryEmail())
+						&& userDetsList.get(i)[1].equals(userDtls.getPassword())) {
+					message = 0;
+				}
+			}
+		} else if(userDtls.getFormName().equals("Registration")){
+			Query query = em.createQuery("SELECT a.primaryEmail" 
+					+ " FROM UserRegistration a \r\n");
+			List<String> userDetsList = (List<String>) query.getResultList();
+
+			for (int i = 0; i < userDetsList.size(); i++) {
+				if (userDetsList.get(i).equals(userDtls.getPrimaryEmail())) {
+					message = 0;
+				}
 			}
 		}
-		
+		else {
+			Query query = em.createQuery("SELECT a.primaryEmail,b.userPassword FROM UserRegistration a , UserLogin b\r\n"
+					+ "WHERE a.userResId = b.ur and b.userRole = :role \n"
+					+ "").setParameter("role", "Admin");
+			
+			
+			
+			List<Object[]> userDetsList = (List<Object[]>) query.getResultList();
+
+			for (int i = 0; i < userDetsList.size(); i++) {
+				if (userDetsList.get(i)[0].equals(userDtls.getPrimaryEmail())
+						&& userDetsList.get(i)[1].equals(userDtls.getPassword())) {
+					message = 0;
+				}
+			}
+			
+		}
+
 		return message;
 	}
 
